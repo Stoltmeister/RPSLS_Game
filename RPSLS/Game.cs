@@ -34,6 +34,7 @@ namespace RPSLS
                 Console.WriteLine("Player One please enter your name");
                 playerOneName = Console.ReadLine();
                 playerOne = new Human();
+                playerOne.name = playerOneName;
                 playerTwo = new Computer();
 
             }
@@ -219,6 +220,7 @@ namespace RPSLS
             else if (roundWinner == 3)
             {
                 displayRoundResults(playerOne, playerTwo, true);
+
             }
             else
             {
@@ -233,7 +235,8 @@ namespace RPSLS
             if (playerOne.score >= roundsToWin)
             {
                 gameRunning = !gameRunning;
-                playerOne.roundsWon++;
+                Console.WriteLine(playerOne.name + " is the winner! (push any key to exit)");
+                Console.ReadLine();
             }
 
 

@@ -13,7 +13,6 @@ namespace RPSLS
         public string currentHand;
         public int score;
         public string name;
-        public int roundsWon;
 
         // constructor
         public Player(string name)
