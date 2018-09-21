@@ -10,7 +10,7 @@ namespace RPSLS
     {
         // member variables
         private int handIndex;
-        private string hand;
+        public string hand;
         public int score;
         public string name;
         private bool isWinning;
@@ -22,7 +22,7 @@ namespace RPSLS
         }
 
         // methods
-        private string GetHand(List<string> handsList)
+        public virtual string GetHand(List<string> handsList)
         {
             do
             {

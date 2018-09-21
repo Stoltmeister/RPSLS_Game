@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace RPSLS
 {
-    class ComputerPlayer
+    class ComputerPlayer : Player
     {
+        // member variables
+        
+        // constructor
+        public ComputerPlayer()
+            : base("Computer")
+        {
+            
+        }
+
+        // methods
+        public override string GetHand(List<string> handsList)
+        {
+            Random randomNumber = new Random();
+            hand = handsList[randomNumber.Next(6)];
+            return hand;
+        }
     }
 }
