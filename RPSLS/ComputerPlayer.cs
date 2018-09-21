@@ -9,12 +9,12 @@ namespace RPSLS
     class ComputerPlayer : Player
     {
         // member variables
-        
+
         // constructor
         public ComputerPlayer()
             : base("Computer")
         {
-            
+
         }
 
         // methods

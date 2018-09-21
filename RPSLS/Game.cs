@@ -89,7 +89,7 @@ namespace RPSLS
                 default:
                     Console.WriteLine("Case not found check inputs");
                     return null;
-                    break;
+
             }
             return null;
         }

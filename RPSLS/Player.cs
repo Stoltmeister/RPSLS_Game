@@ -13,7 +13,6 @@ namespace RPSLS
         public string hand;
         public int score;
         public string name;
-        private bool isWinning;
 
         // constructor
         public Player(string name)
@@ -51,11 +50,11 @@ namespace RPSLS
                     break;
 
             }
-            
+
             return hand;
         }
 
-        private void UpdateScore(Player winner)
+        public void UpdateScore(Player winner)
         {
             winner.score++;
         }
