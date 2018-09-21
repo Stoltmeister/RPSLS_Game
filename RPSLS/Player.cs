@@ -11,15 +11,13 @@ namespace RPSLS
         // member variables
         private int handIndex;
         private string hand;
-        private int score;
-        private string name;
+        public int score;
+        public string name;
         private bool isWinning;
-        private bool isHuman;
 
         // constructor
-        public Player(bool isHuman, string name)
+        public Player(string name)
         {
-            this.isHuman = isHuman;
             this.name = name;
         }
 
@@ -57,6 +55,10 @@ namespace RPSLS
             return hand;
         }
 
+        private void UpdateScore(Player winner)
+        {
+            winner.score++;
+        }
 
     }
 }
