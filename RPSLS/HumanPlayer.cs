@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace RPSLS
 {
-    class Human_vs_Computer
+    class HumanPlayer : Player
     {
+        // member variables
+
+        // constructor
+        
+        // methods
     }
 }

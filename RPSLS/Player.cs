@@ -19,6 +19,10 @@ namespace RPSLS
         {
             this.name = name;
         }
+        public Player()
+        {
+
+        }
 
         // methods
         public virtual string GetHand(List<string> handsList)

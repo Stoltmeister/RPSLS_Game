@@ -12,24 +12,39 @@ namespace RPSLS
         private int roundsToWin;
         public int currentRound;
         private bool gameRunning = true;
-        Player playerOne = new Player("Player One");
-        Player playerTwo = new Player("Player Two");
-        List<string> handsList = new List<string>();
-
-
+        public string playerOneName;
+        Player playerOne;
+        Player playerTwo;
+        public List<string> handsList = new List<string> { "rock", "paper", "scissors", "lizard", "spock" };
 
         // contructor
         public Game()
         {
-            handsList.Add("rock");
-            handsList.Add("paper");
-            handsList.Add("scissors");
-            handsList.Add("lizard");
-            handsList.Add("spock");
-
+            
         }
 
         // methods
+
+        public void SetPlayers(int gameType)
+        {
+            if (gameType == 1)
+            {
+
+            }
+            else if (gameType == 2)
+            {                
+                string playerTwoName;
+                Console.WriteLine("Player One please enter your name");
+                playerOneName = Console.ReadLine();
+                Console.WriteLine("Player Two please enter your name");
+                playerTwoName = Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Error input incorrect");
+                Console.ReadLine();
+            }
+        }
         private string CompareHands(string playerOneHand, string playerTwoHand)
         {
             string playerOne = "playerOne";
