@@ -21,7 +21,7 @@ namespace RPSLS
         public override string GetHand(List<string> handsList)
         {
             Random randomNumber = new Random();
-            currentHand = handsList[randomNumber.Next(handsList.Count + 1)];
+            currentHand = handsList[randomNumber.Next(handsList.Count)];
             return currentHand;
         }
     }
