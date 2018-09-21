@@ -11,6 +11,7 @@ namespace RPSLS
         static void Main(string[] args)
         {
             int userInput;
+            int handWinner;
             string rules = "The rules are the same as rock, paper, scissors with two extra moves: Lizard and Spock. /n" +
                 "Rock beats: scissors and lizard, Paper beats: rock and spock, Scissors beats: paper and lizard, /n" +
                 "Lizard beats: paper and spock, Spock beats: rock and scissors";
@@ -41,11 +42,23 @@ namespace RPSLS
                 playerVsComputer.SetPlayers(userInput);
 
                 // Game steps
-                playerVsComputer.playerOne.GetHand(playerVsComputer.handsList);
-                playerVsComputer.playerTwo.GetHand(playerVsComputer.handsList);
-                playerVsComputer.CompareHands(playerVsComputer.playerOne.currentHand, playerVsComputer.playerOne.currentHand);
+
+                // main game loop
+                while (playerVsComputer.gameRunning)
+                {
+                    // Get Hands
+                    playerVsComputer.playerOne.GetHand(playerVsComputer.handsList);
+                    playerVsComputer.playerTwo.GetHand(playerVsComputer.handsList);
+
+                    // Determine Round Winner
+                    handWinner = playerVsComputer.CompareHands(playerVsComputer.playerOne.currentHand, playerVsComputer.playerTwo.currentHand);
+                    playerVsComputer.UpdateScore(handWinner);
+                    
+                    playerVsComputer.IncrementRounds();
+                }
 
             }
+
             else
             {
                 // creating and starting the game

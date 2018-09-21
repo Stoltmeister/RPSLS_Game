@@ -17,5 +17,8 @@ namespace RPSLS
         }
         
         // methods
+
+        // override the getHand when 2 players to hide the previous choice from the next player
+        // maybe just clear the text off the console instead?
     }
 }

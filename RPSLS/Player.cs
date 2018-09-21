@@ -13,6 +13,7 @@ namespace RPSLS
         public string currentHand;
         public int score;
         public string name;
+        public int roundsWon;
 
         // constructor
         public Player(string name)
@@ -38,29 +39,28 @@ namespace RPSLS
             switch (handIndex)
             {
                 case 1:
-                    currentHand = handsList[1];
+                    currentHand = handsList[0];
                     break;
                 case 2:
-                    currentHand = handsList[2];
+                    currentHand = handsList[1];
                     break;
                 case 3:
-                    currentHand = handsList[3];
+                    currentHand = handsList[2];
                     break;
                 case 4:
-                    currentHand = handsList[4];
+                    currentHand = handsList[3];
                     break;
                 case 5:
-                    currentHand = handsList[5];
+                    currentHand = handsList[4];
                     break;
-
             }
 
             return currentHand;
         }
 
-        public void UpdateScore(Player winner)
+        public void UpdateScore()
         {
-            winner.score++;
+            score++;
         }
 
     }

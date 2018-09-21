@@ -11,7 +11,7 @@ namespace RPSLS
         // member variables
         public int roundsToWin = 3;
         public int currentRound;
-        private bool gameRunning = true;
+        public bool gameRunning = true;
         public string playerOneName;
         public Player playerOne;
         public Player playerTwo;
@@ -32,8 +32,7 @@ namespace RPSLS
                 // single player vs computer game setup
                 Console.WriteLine("Player One please enter your name");
                 playerOneName = Console.ReadLine();
-                playerOne = new HumanPlayer();
-                playerOne.name = playerOneName;
+                playerOne = new HumanPlayer();                
                 playerTwo = new ComputerPlayer();
 
             }
@@ -60,6 +59,7 @@ namespace RPSLS
         {
             int playerOne = 1;
             int playerTwo = 2;
+            int tie = 3;
             switch (playerOneHand)
             {
                 case "rock":
@@ -71,6 +71,10 @@ namespace RPSLS
                     {
                         return playerOne;
                     }
+                    else
+                    {
+                        return tie;
+                    }
                     break;
                 case "paper":
                     if (playerTwoHand == "scissors" || playerTwoHand == "lizard")
@@ -80,6 +84,10 @@ namespace RPSLS
                     else if (playerTwoHand == "spock" || playerTwoHand == "rock")
                     {
                         return playerOne;
+                    }
+                    else
+                    {
+                        return tie;
                     }
                     break;
                 case "scissors":
@@ -91,6 +99,10 @@ namespace RPSLS
                     {
                         return playerOne;
                     }
+                    else
+                    {
+                        return tie;
+                    }
                     break;
                 case "lizard":
                     if (playerTwoHand == "rock" || playerTwoHand == "scissors")
@@ -100,6 +112,10 @@ namespace RPSLS
                     else if (playerTwoHand == "spock" || playerTwoHand == "scissors")
                     {
                         return playerOne;
+                    }
+                    else
+                    {
+                        return tie;
                     }
                     break;
                 case "spock":
@@ -111,6 +127,10 @@ namespace RPSLS
                     {
                         return playerOne;
                     }
+                    else
+                    {
+                        return tie;
+                    }
                     break;
                 default:
                     Console.WriteLine("Case not found check inputs");
@@ -120,27 +140,30 @@ namespace RPSLS
             return 0;
         }
 
-        private void UpdateScore(string roundWinner)
+        public void UpdateScore(int roundWinner)
         {
-            if (roundWinner == "playerOne")
+            if (roundWinner == 1)
             {
                 playerOne.score++;
             }
-            else if (roundWinner == "playerTwo")
+            else if (roundWinner == 2)
             {
                 playerTwo.score++;
             }
+            else
+            {
+
+            }
         }
-        private bool IncrementRounds()
+        public void IncrementRounds()
         {
             currentRound++;
 
-            if (currentRound >= roundsToWin * 2)
+            if (playerOne.score >= roundsToWin)
             {
-                return !gameRunning;
+                gameRunning = !gameRunning;
+                playerOne.roundsWon++;
             }
-
-            return gameRunning;
 
         }
 
