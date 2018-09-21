@@ -11,6 +11,10 @@ namespace RPSLS
         // member variables
 
         // constructor
+        public HumanPlayer() 
+        {
+            
+        }
         
         // methods
     }

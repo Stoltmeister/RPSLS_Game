@@ -10,7 +10,7 @@ namespace RPSLS
     {
         // member variables
         private int handIndex;
-        public string hand;
+        public string currentHand;
         public int score;
         public string name;
 
@@ -38,24 +38,24 @@ namespace RPSLS
             switch (handIndex)
             {
                 case 1:
-                    hand = handsList[1];
+                    currentHand = handsList[1];
                     break;
                 case 2:
-                    hand = handsList[2];
+                    currentHand = handsList[2];
                     break;
                 case 3:
-                    hand = handsList[3];
+                    currentHand = handsList[3];
                     break;
                 case 4:
-                    hand = handsList[4];
+                    currentHand = handsList[4];
                     break;
                 case 5:
-                    hand = handsList[5];
+                    currentHand = handsList[5];
                     break;
 
             }
 
-            return hand;
+            return currentHand;
         }
 
         public void UpdateScore(Player winner)

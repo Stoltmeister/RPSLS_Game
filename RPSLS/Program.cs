@@ -33,14 +33,25 @@ namespace RPSLS
                 }
             } while (userInput != 1 && userInput != 2);
 
+            
             if (userInput == 1)
             {
-                Game playerVComputer = new Game();
-                playerVComputer.SetPlayers(userInput);
+                // creating and starting the game
+                Game playerVsComputer = new Game();
+                playerVsComputer.SetPlayers(userInput);
+
+                // Game steps
+                playerVsComputer.playerOne.GetHand(playerVsComputer.handsList);
+                playerVsComputer.playerTwo.GetHand(playerVsComputer.handsList);
+                playerVsComputer.CompareHands(playerVsComputer.playerOne.currentHand, playerVsComputer.playerOne.currentHand);
+
             }
             else
             {
+                // creating and starting the game
                 Game humanGame = new Game();
+                humanGame.SetPlayers(userInput);
+
             }
         }
     }

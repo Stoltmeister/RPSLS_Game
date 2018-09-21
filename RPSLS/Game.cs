@@ -9,12 +9,12 @@ namespace RPSLS
     class Game
     {
         // member variables
-        private int roundsToWin;
+        public int roundsToWin = 3;
         public int currentRound;
         private bool gameRunning = true;
         public string playerOneName;
-        Player playerOne;
-        Player playerTwo;
+        public Player playerOne;
+        public Player playerTwo;
         public List<string> handsList = new List<string> { "rock", "paper", "scissors", "lizard", "spock" };
 
         // contructor
@@ -29,15 +29,26 @@ namespace RPSLS
         {
             if (gameType == 1)
             {
+                // single player vs computer game setup
+                Console.WriteLine("Player One please enter your name");
+                playerOneName = Console.ReadLine();
+                playerOne = new HumanPlayer();
+                playerOne.name = playerOneName;
+                playerTwo = new ComputerPlayer();
 
             }
             else if (gameType == 2)
-            {                
+            {    
+                // 2 human player game setup
                 string playerTwoName;
                 Console.WriteLine("Player One please enter your name");
                 playerOneName = Console.ReadLine();
+                playerOne = new HumanPlayer();
+                playerOne.name = playerOneName;
                 Console.WriteLine("Player Two please enter your name");
                 playerTwoName = Console.ReadLine();
+                playerTwo = new HumanPlayer();
+                playerTwo.name = playerTwoName;
             }
             else
             {
@@ -45,10 +56,10 @@ namespace RPSLS
                 Console.ReadLine();
             }
         }
-        private string CompareHands(string playerOneHand, string playerTwoHand)
+        public int CompareHands(string playerOneHand, string playerTwoHand)
         {
-            string playerOne = "playerOne";
-            string playerTwo = "playerTwo";
+            int playerOne = 1;
+            int playerTwo = 2;
             switch (playerOneHand)
             {
                 case "rock":
@@ -103,10 +114,10 @@ namespace RPSLS
                     break;
                 default:
                     Console.WriteLine("Case not found check inputs");
-                    return null;
+                    return 0;
 
             }
-            return null;
+            return 0;
         }
 
         private void UpdateScore(string roundWinner)
@@ -120,7 +131,7 @@ namespace RPSLS
                 playerTwo.score++;
             }
         }
-        private bool IncrementRounds(int roundsToWin)
+        private bool IncrementRounds()
         {
             currentRound++;
 
