@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace RPSLS
 {
-    class ComputerPlayer : Player
+    class Computer : Player
     {
         // member variables
 
         // constructor
-        public ComputerPlayer()
+        public Computer()
             : base("Computer")
         {
 
