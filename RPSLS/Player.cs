@@ -12,6 +12,7 @@ namespace RPSLS
         private int handIndex;
         public string currentHand;
         public int score;
+        public string input;
         public string name;
 
         // constructor
@@ -31,8 +32,12 @@ namespace RPSLS
             {
                 Console.WriteLine(currentPlayer.name + " please enter which hand you would like :");
                 Console.WriteLine("'1' = rock, '2' = paper, '3' = scissors, '4' = spock, '5' = lizard");
-                handIndex = Int32.Parse(Console.ReadLine());
-                Console.WriteLine("\n");
+                input = Console.ReadLine();
+                if (input == "1" || input == "2" || input == "3" || input == "4" || input == "5")
+                {
+                    handIndex = Int32.Parse(input);
+                }
+                    Console.WriteLine("\n");
                 if (handIndex > 5 || handIndex < 1)
                 {
                     Console.WriteLine("Please enter correct input!");

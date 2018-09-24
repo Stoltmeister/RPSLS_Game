@@ -86,7 +86,8 @@ namespace RPSLS
 
         public int StartGameMenu()
         {
-            int userInput;
+            int userInput = 3;
+            string userInputUnchecked;
             string rules = "The rules are the same as rock, paper, scissors with two extra moves: Lizard and Spock. \n" +
                 "Rock beats: scissors and lizard, Paper beats: rock and spock, Scissors beats: paper and lizard, \n" +
                 "Lizard beats: paper and spock, Spock beats: rock and scissors \n" +
@@ -97,18 +98,25 @@ namespace RPSLS
                 Console.WriteLine(rules);
                 Console.WriteLine("Please choose a game type : ");
                 Console.WriteLine("Type '1' for Player vs. Computer or '2' for Player vs. Player (0 to quit)");
-                userInput = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("\n");
+                userInputUnchecked = Console.ReadLine();
+                if (userInputUnchecked == "0" || userInputUnchecked == "1" || userInputUnchecked == "2")
+                {
+                    userInput = Int32.Parse(userInputUnchecked);
+                    if (userInput == 0)
+                    {
+                        Environment.Exit(0);
+                    }
+                    if (userInput != 1 && userInput != 2)
+                    {
+                        Console.WriteLine(userInput);
+                        Console.WriteLine("Input not valid please try again! \n");
+                    }
+                }
+                else {
+                    Console.WriteLine("Incorrect input. Please try again (any key to continue) \n");
+                    Console.ReadLine();
+                }
 
-                if (userInput == 0)
-                {
-                    Environment.Exit(0);
-                }
-                if (userInput != 1 && userInput != 2)
-                {
-                    Console.WriteLine(userInput);
-                    Console.WriteLine("Input not valid please try again!");
-                }
             } while (userInput != 1 && userInput != 2);
 
             return userInput;
@@ -138,68 +146,90 @@ namespace RPSLS
                 Console.ReadLine();
                 return (handNumber);
             }
-        }    
+        }
 
-    public void displayCurrentRound()
-    {
-        Console.WriteLine("Round " + currentRound);
+        public void displayCurrentRound()
+        {
+            Console.WriteLine("Round " + currentRound);
+        }
+
+        public void displayRoundResults(Player winner, Player loser, bool isTie)
+        {
+            if (isTie)
+            {
+                Console.WriteLine("Both players had hand " + playerOne.currentHand + " ");
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine(winner.name + " won round " + currentRound + " with " + winner.currentHand + " over " + loser.currentHand);
+                Console.WriteLine("\n");
+            }
+        }
+
+        public void UpdateScore(int roundWinner)
+        {
+            if (roundWinner == 1)
+            {
+                playerOne.score++;
+                displayRoundResults(playerOne, playerTwo, false);
+            }
+            else if (roundWinner == 2)
+            {
+                playerTwo.score++;
+                displayRoundResults(playerTwo, playerOne, false);
+            }
+            else if (roundWinner == 0)
+            {
+                displayRoundResults(playerOne, playerTwo, true);
+
+            }
+            else
+            {
+                Console.WriteLine("error");
+                Console.ReadLine();
+            }
+        }
+        public void IncrementRounds()
+        {
+            currentRound++;
+            int runAgain;
+            if (playerOne.score >= roundsToWin)
+            {
+                gameRunning = !gameRunning;
+                Console.WriteLine(playerOne.name + " is the winner! \n" +
+                    "Press '1' to start a new game" +
+                    " (push any other key to exit) \n");
+                runAgain = Int32.Parse(Console.ReadLine());
+                if (runAgain == 1)
+                {
+                    Game newGame = new Game();
+                    newGame.RunGame();
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
+            else if (playerTwo.score >= roundsToWin)
+            {
+                gameRunning = !gameRunning;
+                Console.WriteLine(playerTwo.name + " is the winner! \n" +
+                    "Press '1' to start a new game" +
+                    " (push any other number to exit) \n");
+                runAgain = Int32.Parse(Console.ReadLine());
+                if (runAgain == 1)
+                {
+                    Game newGame = new Game();
+                    newGame.RunGame();
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
+            }
+
+        }
+
     }
-
-    public void displayRoundResults(Player winner, Player loser, bool isTie)
-    {
-        if (isTie)
-        {
-            Console.WriteLine("Both players had hand " + playerOne.currentHand + " ");
-            Console.WriteLine("\n");
-        }
-        else
-        {
-            Console.WriteLine(winner.name + " won round " + currentRound + " with " + winner.currentHand + " over " + loser.currentHand);
-            Console.WriteLine("\n");
-        }
-    }
-
-    public void UpdateScore(int roundWinner)
-    {
-        if (roundWinner == 1)
-        {
-            playerOne.score++;
-            displayRoundResults(playerOne, playerTwo, false);
-        }
-        else if (roundWinner == 2)
-        {
-            playerTwo.score++;
-            displayRoundResults(playerTwo, playerOne, false);
-        }
-        else if (roundWinner == 0)
-        {
-            displayRoundResults(playerOne, playerTwo, true);
-
-        }
-        else
-        {
-            Console.WriteLine("error");
-            Console.ReadLine();
-        }
-    }
-    public void IncrementRounds()
-    {
-        currentRound++;
-
-        if (playerOne.score >= roundsToWin)
-        {
-            gameRunning = !gameRunning;
-            Console.WriteLine(playerOne.name + " is the winner! (push any key to exit)");
-            Console.ReadLine();
-        }
-        else if (playerTwo.score >= roundsToWin)
-        {
-            gameRunning = !gameRunning;
-            Console.WriteLine(playerTwo.name + " is the winner! (push any key to exit)");
-            Console.ReadLine();
-        }
-
-    }
-
-}
 }
