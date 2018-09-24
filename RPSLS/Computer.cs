@@ -18,7 +18,7 @@ namespace RPSLS
         }
 
         // methods
-        public override string GetHand(List<string> handsList)
+        public override string GetHand(List<string> handsList, Player currentPlayer)
         {
             Random randomNumber = new Random();
             currentHand = handsList[randomNumber.Next(handsList.Count)];

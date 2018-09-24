@@ -33,6 +33,7 @@ namespace RPSLS
                 // single player vs computer game setup
                 Console.WriteLine("Player One please enter your name");
                 playerOneName = Console.ReadLine();
+                Console.WriteLine("\n");
                 playerOne = new Human();
                 playerOne.name = playerOneName;
                 playerTwo = new Computer();
@@ -44,10 +45,12 @@ namespace RPSLS
                 string playerTwoName;
                 Console.WriteLine("Player One please enter your name");
                 playerOneName = Console.ReadLine();
+                Console.WriteLine("\n");
                 playerOne = new Human();
                 playerOne.name = playerOneName;
                 Console.WriteLine("Player Two please enter your name");
                 playerTwoName = Console.ReadLine();
+                Console.WriteLine("\n");
                 playerTwo = new Human();
                 playerTwo.name = playerTwoName;
             }
@@ -68,8 +71,8 @@ namespace RPSLS
             while (gameRunning)
             {
                 // Get Hands
-                playerOne.GetHand(handsList);
-                playerTwo.GetHand(handsList);
+                playerOne.GetHand(handsList, playerOne);
+                playerTwo.GetHand(handsList, playerTwo);
 
                 // Determine Round Winner
                 handWinner = CompareHands(playerOne.currentHand, playerTwo.currentHand);
@@ -83,16 +86,17 @@ namespace RPSLS
         public int StartGameMenu()
         {
             int userInput;
-            string rules = "The rules are the same as rock, paper, scissors with two extra moves: Lizard and Spock. /n" +
-                "Rock beats: scissors and lizard, Paper beats: rock and spock, Scissors beats: paper and lizard, /n" +
-                "Lizard beats: paper and spock, Spock beats: rock and scissors";
+            string rules = "The rules are the same as rock, paper, scissors with two extra moves: Lizard and Spock. \n" +
+                "Rock beats: scissors and lizard, Paper beats: rock and spock, Scissors beats: paper and lizard, \n" +
+                "Lizard beats: paper and spock, Spock beats: rock and scissors \n";
             do
             {
-                Console.WriteLine("Welcome to Rock, Paper, Scissors, Lizard, Spock!");
+                Console.WriteLine("Welcome to Rock, Paper, Scissors, Lizard, Spock! \n");
                 Console.WriteLine(rules);
                 Console.WriteLine("Please choose a game type : ");
                 Console.WriteLine("Type '1' for Player vs. Computer or '2' for Player vs. Player (0 to quit)");
                 userInput = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\n");
 
                 if (userInput == 0)
                 {
@@ -196,12 +200,13 @@ namespace RPSLS
         {
             if (isTie)
             {
-                Console.WriteLine("Both Player had hand " + playerOne.currentHand + " ");
+                Console.WriteLine("Both players had hand " + playerOne.currentHand + " ");
+                Console.WriteLine("\n");
             }
             else
             {
                 Console.WriteLine(winner.name + " won round " + currentRound + " with " + winner.currentHand + " over " + loser.currentHand);
-                Console.WriteLine();
+                Console.WriteLine("\n");
             }            
         }
 
@@ -238,7 +243,12 @@ namespace RPSLS
                 Console.WriteLine(playerOne.name + " is the winner! (push any key to exit)");
                 Console.ReadLine();
             }
-
+            else if (playerTwo.score >= roundsToWin)
+            {
+                gameRunning = !gameRunning;
+                Console.WriteLine(playerTwo.name + " is the winner! (push any key to exit)");
+                Console.ReadLine();
+            }
 
         }
 

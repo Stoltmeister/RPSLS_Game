@@ -25,13 +25,20 @@ namespace RPSLS
         }
 
         // methods
-        public virtual string GetHand(List<string> handsList)
+        public virtual string GetHand(List<string> handsList, Player currentPlayer)
         {
             do
             {
-                Console.WriteLine("Enter which hand you would like :");
+                Console.WriteLine(currentPlayer.name + " please enter which hand you would like :");
                 Console.WriteLine("'1' = rock, '2' = paper, '3' = scissors, '4' = lizard, '5' = spock");
                 handIndex = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("\n");
+                if (handIndex > 5 || handIndex < 1)
+                {
+                    Console.WriteLine("Please enter correct input!");
+                    Console.WriteLine("\n");
+                }
+                
 
             } while (handIndex > 5 || handIndex < 1);
 
