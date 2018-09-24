@@ -14,9 +14,10 @@ namespace RPSLS
         public bool gameRunning = true;
         public string playerOneName;
         private int handWinner;
+        private int handNumber;
         public Player playerOne;
         public Player playerTwo;
-        public List<string> handsList = new List<string> { "rock", "paper", "scissors", "lizard", "spock" };
+        public List<string> handsList = new List<string> { "rock", "paper", "scissors", "spock", "lizard" };
 
         // contructor
         public Game()
@@ -88,7 +89,8 @@ namespace RPSLS
             int userInput;
             string rules = "The rules are the same as rock, paper, scissors with two extra moves: Lizard and Spock. \n" +
                 "Rock beats: scissors and lizard, Paper beats: rock and spock, Scissors beats: paper and lizard, \n" +
-                "Lizard beats: paper and spock, Spock beats: rock and scissors \n";
+                "Lizard beats: paper and spock, Spock beats: rock and scissors \n" +
+                "The format is best of 5 (first to 3 round wins) \n";
             do
             {
                 Console.WriteLine("Welcome to Rock, Paper, Scissors, Lizard, Spock! \n");
@@ -114,143 +116,90 @@ namespace RPSLS
 
         public int CompareHands(string playerOneHand, string playerTwoHand)
         {
-            int playerOne = 1;
-            int playerTwo = 2;
-            int tie = 3;
-            switch (playerOneHand)
+            int playerOneIndex = handsList.IndexOf(playerOneHand);
+            int playerTwoIndex = handsList.IndexOf(playerTwoHand);
+            handNumber = (5 + playerOneIndex - playerTwoIndex) % 5;
+
+            if (handNumber == 1 || handNumber == 3)
             {
-                case "rock":
-                    if (playerTwoHand == "paper" || playerTwoHand == "spock")
-                    {
-                        return playerTwo;
-                    }
-                    else if (playerTwoHand == "lizard" || playerTwoHand == "scissors")
-                    {
-                        return playerOne;
-                    }
-                    else
-                    {
-                        return tie;
-                    }
-                case "paper":
-                    if (playerTwoHand == "scissors" || playerTwoHand == "lizard")
-                    {
-                        return playerTwo;
-                    }
-                    else if (playerTwoHand == "spock" || playerTwoHand == "rock")
-                    {
-                        return playerOne;
-                    }
-                    else
-                    {
-                        return tie;
-                    }
-                case "scissors":
-                    if (playerTwoHand == "spock" || playerTwoHand == "rock")
-                    {
-                        return playerTwo;
-                    }
-                    else if (playerTwoHand == "lizard" || playerTwoHand == "paper")
-                    {
-                        return playerOne;
-                    }
-                    else
-                    {
-                        return tie;
-                    }
-                case "lizard":
-                    if (playerTwoHand == "rock" || playerTwoHand == "scissors")
-                    {
-                        return playerTwo;
-                    }
-                    else if (playerTwoHand == "spock" || playerTwoHand == "scissors")
-                    {
-                        return playerOne;
-                    }
-                    else
-                    {
-                        return tie;
-                    }
-                case "spock":
-                    if (playerTwoHand == "paper" || playerTwoHand == "lizard")
-                    {
-                        return playerTwo;
-                    }
-                    else if (playerTwoHand == "rock" || playerTwoHand == "scissors")
-                    {
-                        return playerOne;
-                    }
-                    else
-                    {
-                        return tie;
-                    }
-                default:
-                    Console.WriteLine("Case not found check inputs");
-                    return 0;
+                return 1;
             }
-
-        }
-
-        public void displayCurrentRound()
-        {
-            Console.WriteLine("Round " + currentRound);
-        }
-
-        public void displayRoundResults(Player winner, Player loser, bool isTie)
-        {
-            if (isTie)
+            else if (handNumber == 2 || handNumber == 4)
             {
-                Console.WriteLine("Both players had hand " + playerOne.currentHand + " ");
-                Console.WriteLine("\n");
+                return 2;
             }
-            else
+            else if (handNumber == 0)
             {
-                Console.WriteLine(winner.name + " won round " + currentRound + " with " + winner.currentHand + " over " + loser.currentHand);
-                Console.WriteLine("\n");
-            }            
-        }
-
-        public void UpdateScore(int roundWinner)
-        {
-            if (roundWinner == 1)
-            {
-                playerOne.score++;
-                displayRoundResults(playerOne, playerTwo, false);
-            }
-            else if (roundWinner == 2)
-            {
-                playerTwo.score++;
-                displayRoundResults(playerTwo, playerOne, false);
-            }
-            else if (roundWinner == 3)
-            {
-                displayRoundResults(playerOne, playerTwo, true);
-
+                return handNumber;
             }
             else
             {
                 Console.WriteLine("error");
                 Console.ReadLine();
+                return (handNumber);
             }
-        }
-        public void IncrementRounds()
+        }    
+
+    public void displayCurrentRound()
+    {
+        Console.WriteLine("Round " + currentRound);
+    }
+
+    public void displayRoundResults(Player winner, Player loser, bool isTie)
+    {
+        if (isTie)
         {
-            currentRound++;
+            Console.WriteLine("Both players had hand " + playerOne.currentHand + " ");
+            Console.WriteLine("\n");
+        }
+        else
+        {
+            Console.WriteLine(winner.name + " won round " + currentRound + " with " + winner.currentHand + " over " + loser.currentHand);
+            Console.WriteLine("\n");
+        }
+    }
 
-            if (playerOne.score >= roundsToWin)
-            {
-                gameRunning = !gameRunning;
-                Console.WriteLine(playerOne.name + " is the winner! (push any key to exit)");
-                Console.ReadLine();
-            }
-            else if (playerTwo.score >= roundsToWin)
-            {
-                gameRunning = !gameRunning;
-                Console.WriteLine(playerTwo.name + " is the winner! (push any key to exit)");
-                Console.ReadLine();
-            }
+    public void UpdateScore(int roundWinner)
+    {
+        if (roundWinner == 1)
+        {
+            playerOne.score++;
+            displayRoundResults(playerOne, playerTwo, false);
+        }
+        else if (roundWinner == 2)
+        {
+            playerTwo.score++;
+            displayRoundResults(playerTwo, playerOne, false);
+        }
+        else if (roundWinner == 0)
+        {
+            displayRoundResults(playerOne, playerTwo, true);
 
+        }
+        else
+        {
+            Console.WriteLine("error");
+            Console.ReadLine();
+        }
+    }
+    public void IncrementRounds()
+    {
+        currentRound++;
+
+        if (playerOne.score >= roundsToWin)
+        {
+            gameRunning = !gameRunning;
+            Console.WriteLine(playerOne.name + " is the winner! (push any key to exit)");
+            Console.ReadLine();
+        }
+        else if (playerTwo.score >= roundsToWin)
+        {
+            gameRunning = !gameRunning;
+            Console.WriteLine(playerTwo.name + " is the winner! (push any key to exit)");
+            Console.ReadLine();
         }
 
     }
+
+}
 }
