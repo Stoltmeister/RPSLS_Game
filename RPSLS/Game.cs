@@ -32,7 +32,7 @@ namespace RPSLS
             if (gameType == 1)
             {
                 // single player vs computer game setup
-                Console.WriteLine("Player One please enter your name");
+                Console.WriteLine("Player One please enter your name: \n");
                 playerOneName = Console.ReadLine();
                 Console.WriteLine("\n");
                 playerOne = new Human(playerOneName);
@@ -43,11 +43,11 @@ namespace RPSLS
             {
                 // 2 human player game setup
                 string playerTwoName;
-                Console.WriteLine("Player One please enter your name");
+                Console.WriteLine("Player One please enter your name: \n");
                 playerOneName = Console.ReadLine();
                 Console.WriteLine("\n");
                 playerOne = new Human(playerOneName);                
-                Console.WriteLine("Player Two please enter your name");
+                Console.WriteLine("Player Two please enter your name: \n");
                 playerTwoName = Console.ReadLine();
                 Console.WriteLine("\n");
                 playerTwo = new Human(playerTwoName);
@@ -119,7 +119,7 @@ namespace RPSLS
                 }
 
             } while (userInput != 1 && userInput != 2);
-
+            Console.WriteLine("\n");
             return userInput;
         }
 
@@ -158,13 +158,11 @@ namespace RPSLS
         {
             if (isTie)
             {
-                Console.WriteLine("Both players had hand " + playerOne.currentHand + " ");
-                Console.WriteLine("\n");
+                Console.WriteLine("Both players had hand " + playerOne.currentHand + " \n");
             }
             else
             {
-                Console.WriteLine(winner.name + " won round " + currentRound + " with " + winner.currentHand + " over " + loser.currentHand);
-                Console.WriteLine("\n");
+                Console.WriteLine(winner.name + " won round " + currentRound + " with " + winner.currentHand + " over " + loser.currentHand + " \n");
             }
         }
 

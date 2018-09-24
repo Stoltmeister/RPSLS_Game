@@ -31,7 +31,7 @@ namespace RPSLS
             do
             {
                 Console.WriteLine(currentPlayer.name + " please enter which hand you would like :");
-                Console.WriteLine("'1' = rock, '2' = paper, '3' = scissors, '4' = spock, '5' = lizard");
+                Console.WriteLine("'1' = rock, '2' = paper, '3' = scissors, '4' = spock, '5' = lizard \n");
                 input = Console.ReadLine();
                 try
                 {
@@ -43,11 +43,9 @@ namespace RPSLS
                     Console.ReadLine();
                     GetHand(handsList, currentPlayer);
                 }
-                    Console.WriteLine("\n");
                 if (handIndex > 5 || handIndex < 1)
                 {
-                    Console.WriteLine("Please enter correct input!");
-                    Console.WriteLine("\n");
+                    Console.WriteLine("Please enter correct input! \n");
                 }
                 
 
