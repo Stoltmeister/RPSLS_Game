@@ -11,9 +11,9 @@ namespace RPSLS
         // member variables
 
         // constructor
-        public Human() 
+        public Human(string name) 
         {
-            
+            this.name = name;
         }
         
         // methods

@@ -35,8 +35,7 @@ namespace RPSLS
                 Console.WriteLine("Player One please enter your name");
                 playerOneName = Console.ReadLine();
                 Console.WriteLine("\n");
-                playerOne = new Human();
-                playerOne.name = playerOneName;
+                playerOne = new Human(playerOneName);
                 playerTwo = new Computer();
 
             }
@@ -47,13 +46,11 @@ namespace RPSLS
                 Console.WriteLine("Player One please enter your name");
                 playerOneName = Console.ReadLine();
                 Console.WriteLine("\n");
-                playerOne = new Human();
-                playerOne.name = playerOneName;
+                playerOne = new Human(playerOneName);                
                 Console.WriteLine("Player Two please enter your name");
                 playerTwoName = Console.ReadLine();
                 Console.WriteLine("\n");
-                playerTwo = new Human();
-                playerTwo.name = playerTwoName;
+                playerTwo = new Human(playerTwoName);
             }
             else
             {
@@ -87,7 +84,6 @@ namespace RPSLS
         public int StartGameMenu()
         {
             int userInput = 3;
-            string userInputUnchecked;
             string rules = "The rules are the same as rock, paper, scissors with two extra moves: Lizard and Spock. \n" +
                 "Rock beats: scissors and lizard, Paper beats: rock and spock, Scissors beats: paper and lizard, \n" +
                 "Lizard beats: paper and spock, Spock beats: rock and scissors \n" +
@@ -98,21 +94,26 @@ namespace RPSLS
                 Console.WriteLine(rules);
                 Console.WriteLine("Please choose a game type : ");
                 Console.WriteLine("Type '1' for Player vs. Computer or '2' for Player vs. Player (0 to quit)");
-                userInputUnchecked = Console.ReadLine();
-                if (userInputUnchecked == "0" || userInputUnchecked == "1" || userInputUnchecked == "2")
+
+                try
                 {
-                    userInput = Int32.Parse(userInputUnchecked);
+                    userInput = Int32.Parse(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid Input! Please try again (any key to continue) \n");
+                    Console.ReadLine();
+                    return StartGameMenu();
+                }
+                if (userInput == 0 || userInput == 1 || userInput == 2)
+                {
                     if (userInput == 0)
                     {
                         Environment.Exit(0);
                     }
-                    if (userInput != 1 && userInput != 2)
-                    {
-                        Console.WriteLine(userInput);
-                        Console.WriteLine("Input not valid please try again! \n");
-                    }
                 }
-                else {
+                else
+                {
                     Console.WriteLine("Incorrect input. Please try again (any key to continue) \n");
                     Console.ReadLine();
                 }
@@ -193,23 +194,13 @@ namespace RPSLS
         public void IncrementRounds()
         {
             currentRound++;
-            int runAgain;
             if (playerOne.score >= roundsToWin)
             {
                 gameRunning = !gameRunning;
                 Console.WriteLine(playerOne.name + " is the winner! \n" +
                     "Press '1' to start a new game" +
                     " (push any other key to exit) \n");
-                runAgain = Int32.Parse(Console.ReadLine());
-                if (runAgain == 1)
-                {
-                    Game newGame = new Game();
-                    newGame.RunGame();
-                }
-                else
-                {
-                    Environment.Exit(0);
-                }
+                ContinueGame();
             }
             else if (playerTwo.score >= roundsToWin)
             {
@@ -217,19 +208,31 @@ namespace RPSLS
                 Console.WriteLine(playerTwo.name + " is the winner! \n" +
                     "Press '1' to start a new game" +
                     " (push any other number to exit) \n");
-                runAgain = Int32.Parse(Console.ReadLine());
-                if (runAgain == 1)
-                {
-                    Game newGame = new Game();
-                    newGame.RunGame();
-                }
-                else
-                {
-                    Environment.Exit(0);
-                }
+                ContinueGame();
+            }
+        }
+
+        private void ContinueGame()
+        {
+            bool runAgain = false;
+            string input;
+            input = Console.ReadLine();
+            if (input == "1")
+            {
+                runAgain = true;
             }
 
+            if (runAgain)
+            {
+                Game newGame = new Game();
+                newGame.RunGame();
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
         }
 
     }
 }
+

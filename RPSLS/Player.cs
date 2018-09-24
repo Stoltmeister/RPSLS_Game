@@ -33,9 +33,15 @@ namespace RPSLS
                 Console.WriteLine(currentPlayer.name + " please enter which hand you would like :");
                 Console.WriteLine("'1' = rock, '2' = paper, '3' = scissors, '4' = spock, '5' = lizard");
                 input = Console.ReadLine();
-                if (input == "1" || input == "2" || input == "3" || input == "4" || input == "5")
+                try
                 {
                     handIndex = Int32.Parse(input);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid input please try again! (Press any key to continue) \n");
+                    Console.ReadLine();
+                    GetHand(handsList, currentPlayer);
                 }
                     Console.WriteLine("\n");
                 if (handIndex > 5 || handIndex < 1)
