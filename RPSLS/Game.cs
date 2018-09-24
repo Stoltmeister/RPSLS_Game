@@ -9,20 +9,22 @@ namespace RPSLS
     class Game
     {
         // member variables
-        public int roundsToWin = 3;
+        public int roundsToWin;
         public int currentRound;
-        public bool gameRunning = true;
+        public bool gameRunning;
         public string playerOneName;
         private int handWinner;
         private int handNumber;
         public Player playerOne;
         public Player playerTwo;
-        public List<string> handsList = new List<string> { "rock", "paper", "scissors", "spock", "lizard" };
+        public List<string> handsList;
 
         // contructor
         public Game()
         {
-
+            roundsToWin = 3;
+            gameRunning = true;
+            handsList = new List<string> { "rock", "paper", "scissors", "spock", "lizard" };
         }
 
         // methods
@@ -149,12 +151,12 @@ namespace RPSLS
             }
         }
 
-        public void displayCurrentRound()
+        public void DisplayCurrentRound()
         {
             Console.WriteLine("Round " + currentRound);
         }
 
-        public void displayRoundResults(Player winner, Player loser, bool isTie)
+        public void DisplayRoundResults(Player winner, Player loser, bool isTie)
         {
             if (isTie)
             {
@@ -171,16 +173,16 @@ namespace RPSLS
             if (roundWinner == 1)
             {
                 playerOne.score++;
-                displayRoundResults(playerOne, playerTwo, false);
+                DisplayRoundResults(playerOne, playerTwo, false);
             }
             else if (roundWinner == 2)
             {
                 playerTwo.score++;
-                displayRoundResults(playerTwo, playerOne, false);
+                DisplayRoundResults(playerTwo, playerOne, false);
             }
             else if (roundWinner == 0)
             {
-                displayRoundResults(playerOne, playerTwo, true);
+                DisplayRoundResults(playerOne, playerTwo, true);
 
             }
             else
@@ -198,7 +200,7 @@ namespace RPSLS
                 Console.WriteLine(playerOne.name + " is the winner! \n" +
                     "Press '1' to start a new game" +
                     " (push any other key to exit) \n");
-                ContinueGame();
+                NewGame();
             }
             else if (playerTwo.score >= roundsToWin)
             {
@@ -206,28 +208,16 @@ namespace RPSLS
                 Console.WriteLine(playerTwo.name + " is the winner! \n" +
                     "Press '1' to start a new game" +
                     " (push any other number to exit) \n");
-                ContinueGame();
+                NewGame();
             }
         }
 
-        private void ContinueGame()
+        private void NewGame()
         {
-            bool runAgain = false;
-            string input;
-            input = Console.ReadLine();
+            string input = Console.ReadLine();
             if (input == "1")
             {
-                runAgain = true;
-            }
-
-            if (runAgain)
-            {
-                Game newGame = new Game();
-                newGame.RunGame();
-            }
-            else
-            {
-                Environment.Exit(0);
+                RunGame();
             }
         }
 

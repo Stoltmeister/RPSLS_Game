@@ -47,10 +47,15 @@ namespace RPSLS
                 {
                     Console.WriteLine("Please enter correct input! \n");
                 }
-                
+
 
             } while (handIndex > 5 || handIndex < 1);
 
+            return(UpdateHand(handIndex, handsList));
+        }
+
+        public string UpdateHand(int handIndex, List<string> handsList)
+        {
             switch (handIndex)
             {
                 case 1:
@@ -72,6 +77,8 @@ namespace RPSLS
 
             return currentHand;
         }
+            
+        
 
         public void UpdateScore()
         {
